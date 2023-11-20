@@ -15,7 +15,8 @@ var initPascal = function (n) {
         for (var oszlop = 0; oszlop <= sor; oszlop++) {
             var ujElemDiv = document.createElement('div');
             ujElemDiv.classList.add('elem');
-            ujElemDiv.innerText = faktorialis(sor) / (faktorialis(oszlop) * faktorialis(sor - oszlop));
+            ujElemDiv.innerText =
+                faktorialis(sor) / (faktorialis(oszlop) * faktorialis(sor - oszlop));
             ujSorDiv.appendChild(ujElemDiv);
         }
     }
