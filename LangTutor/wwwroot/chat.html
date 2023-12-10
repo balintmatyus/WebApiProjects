@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        input {
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #000;
+            width: 100%;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var chatDiv = document.getElementById('chat');
+            var promptInput = document.getElementById('prompt');
+
+            var promptHistory = [];
+
+            promptInput.addEventListener('keydown', e => {
+                if (e.keyCode != 13) {
+                    return;
+                }
+
+                var prompt = promptInput.value;
+                
+                newMessage('user', prompt);
+
+                promptInput.value = '';
+
+                fetch("api/tutor", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(promptHistory)
+                }).then(r => r.text()).then(d => newMessage('assistant', d));
+            });
+
+            var newMessage = function (role, message) {
+                var newMessage = document.createElement('div');
+                newMessage.innerText = role + ': ' + message;
+                chatDiv.appendChild(newMessage);
+
+                promptHistory.push({
+                    'Item1': role,
+                    'Item2': message
+                });
+            };
+        };
+    </script>
+</head>
+<body>
+    <input id="prompt" />
+    <div id="chat"></div>
+</body>
+</html>
