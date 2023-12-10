@@ -15,7 +15,7 @@ namespace LangTutor.Controllers
         {
             string result = string.Empty;
 
-            var openai = new OpenAIAPI("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");
+            var openai = new OpenAIAPI("");
             ChatRequest request = new ChatRequest();
 
             request.Messages = new List<ChatMessage>()
